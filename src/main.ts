@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import './style.css'
-import { ROOMS, TILESET_TILES, type RoomData, getRoomAt } from './maps'
+import { TILESET_TILES, type RoomData, getRoomAt } from './maps'
 
 import tilesImg from './assets/Dungeon Gathering Free Version/Set 1.png'
 
