@@ -3,6 +3,7 @@ import './style.css'
 import { TILESET_TILES, type RoomData, getRoomAt } from './maps'
 
 import tilesImg from './assets/Dungeon Gathering Free Version/Set 1.png'
+import chestImage from './assets/RPG Chests.png'
 
 import playerIdleImg from './assets/DG Knight Expansion Pack Free Ver/Blue Knight idle Sprite-sheet 16x16.png'
 import playerRunImg from './assets/DG Knight Expansion Pack Free Ver/Blue Knight run Sprite-sheet 16x17.png'
@@ -65,6 +66,11 @@ function preload(this: Phaser.Scene) {
         frameWidth: 16,
         frameHeight: 16
     });
+    this.load.spritesheet('ch', chestImage, {
+        margin: 16/2,
+        frameWidth: 16,
+        frameHeight: 16
+    })
 }
 
 let cursors: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -266,6 +272,8 @@ function loadRoom(this: Phaser.Scene, worldX: number, worldY: number, spawnAt: {
             playerObj.setPosition(posX, posY);
             playerObj.setDepth(10); // Remonter le joueur au-dessus des nouveaux layers
         }
+
+        this.physics.add.sprite(100,100, 'ch');
 
         // Collision entre le joueur et les murs
         playerCollider = this.physics.add.collider(playerObj, wallLayer!);
