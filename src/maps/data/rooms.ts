@@ -25,6 +25,8 @@ const FL = TILESET_TILES.FLOOR_LEFT;
 const FR = TILESET_TILES.FLOOR_RIGHT;
 const FB = TILESET_TILES.FLOOR_BOTTOM;
 const F   = TILESET_TILES.FLOOR;
+const V = TILESET_TILES.VOID;
+const WF = TILESET_TILES.WATER_FLOW;
 const _   = -1;
 
 const empty16x16 = Array(16).fill(null).map(() => Array(16).fill(_));
@@ -34,12 +36,12 @@ export const ROOMS: Record<string, RoomData> = {
         name: "Grande Salle Vide",
         exits: { top: true, bottom: true, left: true, right: true },
         walls: [
-            [WTL, WT, WT, WT, WT, WT, IBR, _,  _,  IBL, WT, WT, WT, WT, WT, WTR],
+            [WTL, WT, WT, WT, WT, TILESET_TILES.WALL_HOLE, IBR, _,  _,  IBL, WT, WT, WT, WT, WT, WTR],
             [WL,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _, WR],
             [WL,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _, WR],
             [WL,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _, WR],
             [WL,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _, WR],
-            [WL,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _, WR],
+            [WL,  _,  _,  _,  _,  TILESET_TILES.WALL_HOLE,  _,  _,  _,  _,  _,  _,  _,  _,  _, WR],
             [IBR,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _, IBL],
             [_,   _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _, _],
             [_,   _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _,  _, _],
@@ -69,7 +71,24 @@ export const ROOMS: Record<string, RoomData> = {
             [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
             [F, F, F, F, F, F, F, FB, FB, F, F, F, F, F, F, F]
         ],
-        puddles: empty16x16,
+        puddles: [
+            [_, _, _, _, _, WF, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, TILESET_TILES.PUDDLE_WATER_TL, TILESET_TILES.PUDDLE_WATER_T, TILESET_TILES.PUDDLE_WATER_TR, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, TILESET_TILES.PUDDLE_WATER_L, TILESET_TILES.PUDDLE_WATER_CENTER, TILESET_TILES.PUDDLE_WATER_R, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, TILESET_TILES.PUDDLE_WATER_BL, TILESET_TILES.PUDDLE_WATER_B, TILESET_TILES.PUDDLE_WATER_BR, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _]
+        ],
         torches: [
             [_, _, _, TT, _, _, _, _, _, _, _, TT, _, _, _, _],
             [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
@@ -189,5 +208,123 @@ export const ROOMS: Record<string, RoomData> = {
         ],
         puddles: empty16x16,
         torches: empty16x16
+    },
+    SMALL_ROOM: {
+        name: "Petite Salle",
+        exits: { top: true, bottom: true, left: true, right: true },
+        walls: [
+            [V, V, V, V, V, V, WL, _, _, WR, V, V, V, V, V, V],
+            [V,  V,  V,  V,  V,  V,  WL,  _, _,  WR,  V,  V,  V,  V,  V, V],
+            [V,  V,  V,  V,  V,  V,  WL,  _, _,  WR,  V,  V,  V,  V,  V, V],
+            [V,  V,  V, WTL, WT, WT, IBR, _, _, IBL, WT, WT, WTR, V,  V, V],
+            [V,  V,  V, WL,  _,  _,  _,  _, _,  _,  _,  _, WR,  V,  V, V],
+            [V,  V,  V, WL,  _,  _,  _,  _, _,  _,  _,  _, WR,  V,  V, V],
+            [WT,  WT,  WT,IBR,  _,  _,  _,  _, _,  _,  _,  _, IBL,  WT, WT, WT],
+            [_,   _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, _],
+            [_,   _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, _],
+            [WB,  WB,  WB, ITR,  _,  _,  _,  _, _,  _,  _,  _, ITL,  WB, WB, WB],
+            [V,  V,  V, WL,  _,  _,  _,  _, _,  _,  _,  _, WR,  V,  V, V],
+            [V,  V,  V, WL,  _,  _,  _,  _, _,  _,  _,  _, WR,  V,  V, V],
+            [V,  V,  V, WBL, WB, WB, ITR, _, _, ITL, WB, WB, WBR, V,  V, V],
+            [V,  V,  V,  V,  V,  V,  WL,  _,_,  WR,  V,  V,  V,  V,  V, V],
+            [V,  V,  V,  V,  V,  V,  WL,  _, _,  WR,  V,  V,  V,  V,  V, V],
+            [V, V, V, V, V, V, WL, _, _, WR, V, V, V, V, V, V]
+        ],
+        floors: [
+            [F, F, F, F, F, F, F, FT, FT, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [FL, F, F, F, F, F, F, F, F, F, F, F, F, F, F, FR],
+            [FL, F, F, F, F, F, F, F, F, F, F, F, F, F, F, FR],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, FB, FB, F, F, F, F, F, F, F]
+        ],
+        puddles: empty16x16,
+        torches: [
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, TL, _, _, _, _, _, _, _, _, TR, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, TL, _, _, _, _, _, _, _, _,  TR, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _]
+        ]
+    },
+    PILLAR_ROOM: {
+        name: "Salle du Pilier",
+        exits: { top: true, bottom: true, left: true, right: true },
+        walls: [
+            [WTL, WT, WT, WT, WT, WT, IBR, _, _, IBL, WT, WT, WT, WT, WT, WTR],
+            [WL,  _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, WR],
+            [WL,  _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, WR],
+            [WL,  _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, WR],
+            [WL,  _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, WR],
+            [WL,  _,  _,  _,  _, ITL, IT, IT, IT, IT, ITR,  _,  _,  _,  _, WR],
+            [IBR,  _,  _,  _,  _, IL,  V,  V, V,  V,  IR,  _,  _,  _,  _, IBL],
+            [_,   _,  _,  _,  _,  IL,  V,  V, V,  V,  IR,  _,  _,  _,  _, _],
+            [_,   _,  _,  _,  _,  IL,  V,  V, V,  V,  IR,  _,  _,  _,  _, _],
+            [ITR,  _,  _,  _,  _, IBL, IB, IB, IB, IB, IBR,  _,  _,  _,  _, ITL],
+            [WL,  _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, WR],
+            [WL,  _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, WR],
+            [WL,  _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, WR],
+            [WL,  _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, WR],
+            [WL,  _,  _,  _,  _,  _,  _,  _, _,  _,  _,  _,  _,  _,  _, WR],
+            [WBL, WB, WB, WB, WB, WB, ITR, _, _, ITL, WB, WB, WB, WB, WB, WBR]
+        ],
+        floors: [
+            [F, F, F, F, F, F, F, FT, FT, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [FL, F, F, F, F, F, F, F, F, F, F, F, F, F, F, FR],
+            [FL, F, F, F, F, F, F, F, F, F, F, F, F, F, F, FR],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F],
+            [F, F, F, F, F, F, F, FB, FB, F, F, F, F, F, F, F]
+        ],
+        puddles: empty16x16,
+        torches: [
+            [_, _, _, _, TT, _, _, _, _, _, _, TT, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [TL, _, _, _, _, _, _, _, _, _, _, _, _, _, _, TR],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [TL, _, _, _, _, _, _, _, _, _, _, _, _, _, _, TR],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+            [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _]
+        ]
     }
 };
